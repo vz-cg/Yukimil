@@ -1,0 +1,115 @@
+/* --- ボックス --- */
+div.area {
+width: 720px; /* ボックスの幅 */
+padding: 3px; /* ボックスのパディング */
+         background-color: #ffffff; /* ボックスの背景色 */
+border: 1px #e0e0e0 solid; /* ボックスの境界線 */
+        text-align: center;
+}
+
+/* --- マップボックス --- */
+div.area dl {
+margin: 0;
+background: #eef7fe url(../img/map_back.gif) repeat-x top; /* マップボックスの背景（グラデーション） */
+border: 1px #e0e0e0 solid; /* マップボックスの境界線 */
+}
+
+/* --- タイトルエリア --- */
+div.area dt {
+margin: 5px; /* タイトルエリアのマージン */
+padding: 3px; /* タイトルエリアのパディング */
+         background-color: #eef7fe; /* タイトルエリアの背景色 */
+         font-weight: bold; /* 太字 */
+color: #3d7eab; /* 文字色 */
+}
+
+/* --- コメントエリア --- */
+div.area dd.description {
+margin: 5px 0; /* コメントエリアのマージン（上下、左右） */
+font-size: 80%; /* 文字サイズ */
+}
+div.area dd.caution {
+margin: 5px 0; /* コメントエリアのマージン（上下、左右） */
+font-size: 60%; /* 文字サイズ */
+}
+/* --- マップエリア --- */
+div.area dd.map {
+margin: 10px 20px 0; /* マップエリアのマージン（上下、左右） */
+position:relative;
+z-index:1;
+}
+div.area dd.map img {
+border: none;
+vertical-align:middle;
+}
+div.area dd.map #new-chitose-ap {
+position:absolute;
+top:365;
+left:560;
+}
+div.area dd.map div.ski_area{
+position:absolute;
+}
+div.area dd.map div.ski_area div.link{
+margin:0;
+padding:2px;
+width:150px;
+height:25px;
+background-color:#cceef0;
+text-align:left;
+border-radius:2px 30px;
+border-bottom-style:solid;
+border-bottom-width:5px;
+border-bottom-color:#88ccf0;
+position:absolute;
+top:280px;
+left:0;
+     z-index:2
+}
+div.area dd.map div.ski_area div.link img{
+width:30px;
+height:30px;
+}
+div.area dd.map div.ski_area div.live-cam{
+display:none;
+}
+.cam {
+    background-color:#999999;
+position:relative;
+         z-index:3
+}
+.cam:before {
+content:'';
+display:block;
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+box-shadow: inset 0 0 0px 8px rgba(255, 255, 255, 0.6);
+}
+div.area dd.map #sapporo-teine {
+position:absolute;
+top:-75;
+left:380;
+}
+div.area dd.map #kiroro {
+position:absolute;
+top:-20;
+left:220;
+}
+div.area dd.map #sapporo-kokusai {
+position:absolute;
+top:20;
+left:250;
+}
+div.area dd.map #nakayama-touge {
+position:absolute;
+top:85;
+left:320;
+}
+div.area dd.map #yubari-racey {
+position:absolute;
+top:-35;
+left:560;
+}
