@@ -6,7 +6,15 @@ while read line; do
 
     name=`echo $line | cut -d ',' -f 1`;
     site=`echo $line | cut -d ',' -f 2`;
-    wget -O ./img/ski/$name $site;
+    
+#download livecam only when image does not updated within 10min.
+    if test ! -e ./img/ski/$name; then
+        wget -O ./img/ski/$name $site;
+        cp ./img/ski/$name ./img/ski/archive/${name}`date "+%Y%m%d%H%M"`;
+    elif test -z `find ./img/ski/$name -mmin -10`; then
+        wget -O ./img/ski/$name $site;
+        cp ./img/ski/$name ./img/ski/archive/${name}`date "+%Y%m%d%H%M"`;
+    fi
 
 #insert label
    convert ./img/ski/$name -geometry 250x250 -background Khaki  label:"${name}" -pointsize 16 -gravity Center -append    ./img/ski/labeled/`printf %d $column`_${name}_label.jpg
