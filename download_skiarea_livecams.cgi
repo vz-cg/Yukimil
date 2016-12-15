@@ -43,7 +43,7 @@ while read line; do
     x1=`expr 5 + $i % 3 \* 260`
     y1=`expr 5 + $i / 3 \* 260`
 
-    echo "<area shape=\"rect\" coords=\"${x1}, ${y1}, $((${x1} + 250)), $((${y1} + 250))\" href=\"$site\" alt=\"$name\">"
+    echo "<area shape=\"rect\" coords=\"${x1}, ${y1}, $((${x1} + 250)), $((${y1} + 250))\" href=\"$site\" target=\" _blank\" alt=\"$name\">"
 
     i=$(($i+1))
 done < ski_livecams.conf
