@@ -31,33 +31,19 @@ if [ `find ../img/ski/archive/${target} -name "movie.gif" -mtime -2h | wc -l` -e
     files=`find . -name "${target}*" -mtime -3d | tr -d "./" | sort`
 
     #make gif anime
-    convert ${files} -resize 250x resize_%06d.gif
-    convert -loop 1 -delay 40 resize_*.gif movie.gif
-        #動画開始リンク用サムネイル画像を確保
-    mv `ls resize_*.gif | head -1` thumbnail.gif
-        #使用後のファイルを削除
-    rm resize_*.gif
+    for file in $files; do
+        if [ ! -e resize_${file}* ]; then
+            convert ${file} -resize 250x resize_${file}.gif
+        fi
+    done
+    files=`find . -name "resize_${target}*" -mtime -3d | tr -d "./" | sort`
+    convert -loop 1 -delay 40 ${files} movie.gif
 fi
 
 
 echo "<p>"
-echo "画像をクリックで開始"
 echo "<img src=\"../img/ski/archive/${target}/movie.gif\" alt=\"start gif animation\"/>" 
 #echo "<img src=\"http://akimil-sapporo.sakura.ne.jp/img/ski/archive/${target}/movie.gif\" />" 
 echo "</p>"
-cat <<EOF
-<script>
-var images = Array.prototype.slice.call(document.images);
-images.forEach(function(image){
-    var src = image.getAttribute('src');
-EOF
-echo "image.src=\"../img/ski/archive/${target}/thumbnail.gif\"" 
-cat <<EOF
-    image.onclick = function(){
-        image.src =src;
-    };
-});
-</script>
-EOF
 echo "</body>"
 echo "</html>"

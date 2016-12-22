@@ -2,6 +2,8 @@
 
 #download live cam images
 column=0
+date=`date "+%Y%m%d%H%M"`
+date_with_sepa=`date "+%Y/%m/%d %H:%M"`
 while read line; do
 
     name=`echo $line | cut -d ',' -f 1`;
@@ -13,17 +15,22 @@ while read line; do
 #download livecam only when image does not updated within 10min.
     if test ! -e ./img/ski/$name; then
         wget -nv -O ./img/ski/$name $site;
-        cp ./img/ski/$name ${dir}/${name}`date "+%Y%m%d%H%M"`;
-    elif test -z `find ./img/ski/$name -mmin -10`; then
+        cp ./img/ski/$name ${dir}/${name}${date};
+        #insert label
+        convert ./img/ski/$name -geometry 250x250 -background Khaki  label:"${name} ${date_with_sepa}" -pointsize 16 -gravity Center -append    ./img/ski/labeled/`printf %d $column`_${name}_label.jpg
+        #save laveled image to make time lapse
+        cp ./img/ski/labeled/`printf %d $column`_${name}_label.jpg ${dir}/resize_${name}${date}
+    elif [ `find ./img/ski/$name -mmin -10 | wc -l` -eq 0 ]; then
         wget -nv -O ./img/ski/$name $site;
-        cp ./img/ski/$name ${dir}/${name}`date "+%Y%m%d%H%M"`;
+        cp ./img/ski/$name ${dir}/${name}${date};
+        #insert label
+        convert ./img/ski/$name -geometry 250x250 -background Khaki  label:"${name} ${date_with_sepa}" -pointsize 16 -gravity Center -append    ./img/ski/labeled/`printf %d $column`_${name}_label.jpg
+        #save laveled image to make time lapse
+        cp ./img/ski/labeled/`printf %d $column`_${name}_label.jpg ${dir}/resize_${name}${date}
     fi
 
-#insert label
-   convert ./img/ski/$name -geometry 250x250 -background Khaki  label:"${name}" -pointsize 16 -gravity Center -append    ./img/ski/labeled/`printf %d $column`_${name}_label.jpg
      column=$((column+1))
 
-#    convert -geometry 150x150 -font Arial-Normal -pointsize 15 -gravity south -annotate 0 "$name" -fill red ./img/ski/$name ./img/ski/labeled/${name}_label.jpg
 done < ski_livecams.conf  
 
 #montage images
