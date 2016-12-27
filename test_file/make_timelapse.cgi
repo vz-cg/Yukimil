@@ -6,12 +6,13 @@ target=`echo ${QUERY_STRING} | sed -e "s/name=\([^&]*\).*/\1/"`
 #query unexpected ch test
 [ `echo $target | sed 's/\([a-z]|[-/]*[0-9]*\).*/\1/'` != $target ] && exit 1;
 
+cd ../img/ski/archive/${target}
+
 #if movie.gif exsists and that made if this 2hour,
 #just show that. else make gif movie.
 if [ `find ../img/ski/archive/${target} -name "movie.gif" -mtime -2h | wc -l` -eq 0 ]; then
     #choose pictures in this 3days.
     if [ -e ../img/ski/archive/${target} ] ; then
-        cd ../img/ski/archive/${target}
     else
         exit 1;
     fi
@@ -29,3 +30,4 @@ fi
 
 echo "Content-Type: image/gif"
 echo ""
+cat /home/akimil-sapporo/www/img/ski/archive/${target}/movie.gif

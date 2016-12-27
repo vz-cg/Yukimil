@@ -24,6 +24,7 @@ function start_timelapse(target){
     // XMLHttpRequest オブジェクトを作成
     // ------------------------------------------------------------
     var xhr = XMLHttpRequestCreate();
+    xhr.responseType = "blob";
 
     // ------------------------------------------------------------
     // XHR 通信の状態が変化するたびに実行されるイベント
@@ -61,8 +62,10 @@ function start_timelapse(target){
                     // ------------------------------------------------------------
                     if((200 <= xhr.status && xhr.status < 300) || (xhr.status == 304)){
 
+                        var blob = xhr.response;
+
                         document.getElementById("timelapse_dl").removeChild(loading_img_element);
-                        target.setAttribute("src", "../img/ski/archive/"+target_name+"/movie.gif");
+                        target.setAttribute("src", window.URL.createObjectURL(blob));
 
                         // ------------------------------------------------------------
                         // リクエスト失敗
