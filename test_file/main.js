@@ -18,7 +18,8 @@ function XMLHttpRequestCreate(){
 
 function start_timelapse(target){
     var target_name=target.getAttribute("class");
-    var loadingImgElemet = document.getElementById("loading");
+    var loading_img_element = document.createElement("img");
+    loading_img_element.src="../img/loading-02.gif";
     // ------------------------------------------------------------
     // XMLHttpRequest オブジェクトを作成
     // ------------------------------------------------------------
@@ -36,10 +37,11 @@ function start_timelapse(target){
             case 1:
             case 2:
             case 3:
-                //target.setAttribute("src", "../img/loading-20.gif");
-                loadingImgElemet.style.display="block";
-                loadingImgElemet.style.top=target.offsetTop + 120 + "px";
-                loadingImgElemet.style.left=target.offsetLeft + 120 + "px";
+                loading_img_element.style.display="block";
+                loading_img_element.style.position="absolute";
+                loading_img_element.style.top=target.offsetTop + 120 + "px";
+                loading_img_element.style.left=target.offsetLeft + 120 + "px";
+                document.getElementById("timelapse_dl").appendChild(loading_img_element);
                 break;
             case 4:
                 // ------------------------------------------------------------
@@ -59,7 +61,7 @@ function start_timelapse(target){
                     // ------------------------------------------------------------
                     if((200 <= xhr.status && xhr.status < 300) || (xhr.status == 304)){
 
-                        loadingImgElemet.style.display="none";
+                        document.getElementById("timelapse_dl").removeChild(loading_img_element);
                         target.setAttribute("src", "../img/ski/archive/"+target_name+"/movie.gif");
 
                         // ------------------------------------------------------------
