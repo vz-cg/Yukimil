@@ -1,0 +1,35 @@
+@charset "UTF-8"
+
+body {
+    font-family: ' メイリオ ',
+    'Hiragino Kaku Gothiv Pro',
+    sans-serif
+}
+
+div.menu {
+    position:relative;
+    width:100%
+}
+
+div.menu dt{
+    display:table-cell;
+    width:250px;
+    height:250px;
+    vertical-align:middle;
+    margin:5px;
+    float:left;
+}
+
+dt img{
+    width:auto;
+    height:auto;
+    max-width:250px;
+    max-height:250px;
+}
+
+img#loading {
+    width:16px;
+    height:16px;
+    display:none;
+    position:absolute;
+}
